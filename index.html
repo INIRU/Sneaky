@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="game" class="game">
+      <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">잡았다!</h5>
+              <button
+                type="button"
+                class="btn-close close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>INIRU를 잡았다.</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-success close"
+                data-bs-dismiss="modal"
+              >
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="title fw-bold w-100 p-2">
+          <h1 id="game-title" class="text-center fw-bold"></h1>
+        </div>
+        <div class="canverse position-relative">
+          <button class="run btn btn-danger" id="in">
+            <div class="overay"></div>
+            <img src="./INIRU.png" width="100" alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container w-100" id="menu">
+      <div
+        class="title-box d-flex w-100 justify-content-center align-items-center gap-3"
+      >
+        <button class="inddd" id="inddd">
+          <img src="./INIRU.png" width="100" alt="" srcset="" id="inddd" />
+        </button>
+        <h1 id="title" class="text-center fw-bold mt-3 title">INIRU 잡기</h1>
+      </div>
+      <h4 class="text-center mt-3">
+        현재 난이도 :
+        <span id="text-diff" class="fw-bold" style="color: greenyellow"
+          >쉬움</span
+        >
+      </h4>
+      <div class="diff-box d-flex justify-content-center mt-5 gap-3">
+        <button class="easy diff-btn btn btn-success fw-bold">쉬움</button>
+        <button class="normal diff-btn btn btn-primary fw-bold">보통</button>
+        <button class="hard diff-btn btn btn-danger fw-bold">어려움</button>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button id="start" class="btn diff-btn btn-dark fw-bold mt-4">
+          게임 시작!
+        </button>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      let speed = 1000;
+      let event;
+
+      $('#start').on('click', function () {
+        $('#menu').hide();
+        $('#game').css('display', 'block');
+        console.log(speed);
+        event = setInterval(function () {
+          $('#in').css('top', `${Math.floor(Math.random() * 91)}%`);
+          $('#in').css('left', `${Math.floor(Math.random() * 91)}%`);
+        }, speed);
+      });
+
+      $('.easy').on('click', function () {
+        $('#text-diff').html('쉬움');
+        $('#text-diff').css('color', 'greenyellow');
+        $('#game-title').html('INIRU 잡기');
+        speed = 1000;
+      });
+
+      $('.normal').on('click', function () {
+        $('#text-diff').html('보통');
+        $('#text-diff').css('color', 'blue');
+        $('#game-title').html('INIRU 잡기');
+        speed = 500;
+      });
+
+      $('.hard').on('click', function () {
+        $('#text-diff').html('어려움');
+        $('#text-diff').css('color', 'red');
+        $('#game-title').html('INIRU 잡기');
+        speed = 100;
+      });
+
+      $('#inddd').on('click', function () {
+        $('#text-diff').html('하드코어');
+        $('#text-diff').css('color', 'darkred');
+        $('#game-title').html('INIRU 잡기');
+        speed = 50;
+      });
+
+      $('#inddd').hover(
+        function () {
+          $('#title').html('INIRUUUU 잡기');
+        },
+        function () {
+          $('#title').html('INIRU 잡기');
+        }
+      );
+
+      $('#in').on('click', function () {
+        clearInterval(event);
+        event = null;
+
+        $('.modal').toggleClass('show-modal');
+      });
+
+      $('.close').on('click', function () {
+        $('.modal').toggleClass('show-modal');
+      });
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
